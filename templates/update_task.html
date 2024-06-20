@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+</head>
+<body>
+    <h1>Update Task</h1>
+    <form action="{{ url_for('update_task', task_id=task.id) }}" method="post">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" value="{{ task.title }}" required><br>
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" value="{{ task.description }}" required><br>
+        <label for="due_date">Due Date:</label>
+        <input type="date" name="due_date" id="due_date" value="{{ task.due_date }}" required><br>
+        <label for="status">Status:</label>
+        <input type="text" name="status" id="status" value="{{ task.status }}" required><br>
+        <button type="submit">Update Task</button>
+    </form>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>

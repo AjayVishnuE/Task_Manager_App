@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+</head>
+<body>
+    <h1>Task Management System</h1>
+    <a href="{{ url_for('add_task') }}">Add Task</a>
+    <form action="{{ url_for('save_tasks') }}" method="post" style="display:inline;">
+        <button type="submit">Save Tasks</button>
+    </form>
+    <form action="{{ url_for('load_tasks') }}" method="post" style="display:inline;">
+        <button type="submit">Load Tasks</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task.title }}</strong> - {{ task.description }} - {{ task.due_date }} - {{ task.status }}
+                {% if task.id %}
+                    <a href="{{ url_for('update_task', task_id=task.id) }}">Update</a>
+                    <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                {% else %}
+                    <span>No ID</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
